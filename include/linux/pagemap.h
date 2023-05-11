@@ -737,6 +737,10 @@ static inline unsigned find_get_pages_tag(struct address_space *mapping,
 struct page *grab_cache_page_write_begin(struct address_space *mapping,
 			pgoff_t index);
 
+unsigned find_get_entries_tag(struct address_space *mapping, pgoff_t start,
+			xa_mark_t tag, unsigned int nr_entries,
+			struct page **entries, pgoff_t *indices);
+
 /*
  * Returns locked page at given index in given cache, creating it if needed.
  */

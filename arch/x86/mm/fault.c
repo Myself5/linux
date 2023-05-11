@@ -1376,6 +1376,16 @@ retry:
 	 * we can handle it..
 	 */
 good_area:
+
+	if (error_code & X86_PF_WRITE) {
+		if (vma->original_write && vma->vm_ops
+		    			&& vma->vm_ops->dax_cow) {
+			mmap_read_lock(mm);
+			vma->vm_ops->dax_cow(vma, address);
+			mmap_read_unlock(mm);
+		}
+	}
+
 	if (unlikely(access_error(error_code, vma))) {
 		bad_area_access_error(regs, error_code, address, vma);
 		return;

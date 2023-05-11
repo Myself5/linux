@@ -367,6 +367,7 @@ unsigned long change_protection(struct vm_area_struct *vma, unsigned long start,
 
 	return pages;
 }
+EXPORT_SYMBOL(change_protection);
 
 static int prot_none_pte_entry(pte_t *pte, unsigned long addr,
 			       unsigned long next, struct mm_walk *walk)
